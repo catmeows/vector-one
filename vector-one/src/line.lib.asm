@@ -13,7 +13,7 @@
 	.MODULE linelib
 
 vec1_buf
-	.BLOCK 4096
+	.FILL 4096
 vec1_cls
 
 	;CLEAR BUFFER

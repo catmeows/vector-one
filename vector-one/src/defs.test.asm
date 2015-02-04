@@ -1,5 +1,5 @@
 
-	.MODULE test	
+	.MODULE test_defs	
 	
 	add_hl_a		
 
