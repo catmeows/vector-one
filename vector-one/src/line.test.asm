@@ -2,6 +2,9 @@
 
 	.MODULE test_line
 
+	xor a
+	ld ($5C78), a
+
 	call vec1_cls	
 
 	ld b, 123
@@ -36,4 +39,8 @@ _loop2
 	jr nc, _loop2
 
 	call vec1_copy
+
+	ld a, ($5C78)
+	ld b, 0
+	ld c, a
 	ret
