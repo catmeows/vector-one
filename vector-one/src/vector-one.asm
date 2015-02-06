@@ -9,4 +9,5 @@
 	;test definitions
 	#INCLUDE "src/defs.test.asm"
 
-	#INCLUDE "src/plot.test.asm"	
+	;#INCLUDE "src/plot.test.asm"
+	#INCLUDE "src/line.test.asm"	
