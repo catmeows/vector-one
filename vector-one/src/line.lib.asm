@@ -154,7 +154,7 @@ vec1_line
 
 		;find left point
 		ld a, b
-		cp e
+		cp d
 		jr c, _liney1		; if x1>=x2 swap points 
 		ex_de_bc		
 _liney1
