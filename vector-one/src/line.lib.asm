@@ -276,7 +276,7 @@ _liney_0
 _liney_0a
 		set 0, (hl) \ add hl, de \ sub c \
 		jr c, _liney_0b
-		djnz _liney_6a \ ret
+		djnz _liney_0a \ ret
 
 _liney_0b
 		inc l
