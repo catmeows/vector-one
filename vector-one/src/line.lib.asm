@@ -283,7 +283,111 @@ _liney_0b
 		jp _liney_7
 
 _linex
-	TODO ;line has main X axis
+		ld a, l
+		withix
+		ld l, a			;store dy, the loop count
+		ld a, h
+		withix
+		ld h, a			;store dx
+
+		;find left point
+		ld a, b
+		cp d
+		jr c, _linex1
+		ex_de_bc
+_linex1
+		;decide vertical step
+		ld a, c
+		cp e
+		ld de, 32
+		jr c, _linex2
+		ld de, -32
+_linex2
+		;ptr buffer(x,y)
+
+		call _line_start
+
+		;prepare jump into loop
+
+		ld b, h		;save HL
+		ld c, l		
+		add a, a	;compute entry point for given bit
+		ld hl, _linex_jmptab
+		add a, l
+		ld l, a
+		jr nc, $ + 3
+		inc h						
+		ld a, (hl)
+		inc hl
+		ld h, (hl)
+		ld l, a			
+		push hl		;store ptr on stack
+		ld h, b
+		ld l, c	
+
+		;C=dy
+
+		withix
+		ld c, l
+
+		;A=dy/2 B=dy		
+
+		withix
+		ld a, h
+		ld b, a
+		srl a
+
+		;entry point
+
+		ret
+
+_linex_jmptab
+		.WORD _linex_7a, _linex_6a, _linex_5a, _linex_4a   
+		.WORD _linex_3a, _linex_2a, _linex_1a, _linex_0a
+
+_linex_7
+		inc l
+		dec b
+		ret z
+_linex_7a
+		set 7, (hl)
+		sub c
+		jp nc, _linex_6
+		withix
+		add a, h
+		add hl, de
+_linex_6
+		dec b
+		ret z
+_linex_6a
+		set 6, (hl) \ sub c \ jp nc, _linex_5 \ withix \ add a, h \ add hl, de \
+_linex_5
+		dec b \ ret z \	
+		
+_linex_5a
+		set 5, (hl) \ sub c \ jp nc, _linex_4 \ withix \ add a, h \ add hl, de \
+_linex_4
+		dec b \ ret z \	
+_linex_4a
+		set 4, (hl) \ sub c \ jp nc, _linex_3 \ withix \ add a, h \ add hl, de \
+_linex_3
+		dec b \ ret z \	
+_linex_3a
+		set 3, (hl) \ sub c \ jp nc, _linex_2 \ withix \ add a, h \ add hl, de \
+_linex_2
+		dec b \ ret z \	
+_linex_2a
+		set 2, (hl) \ sub c \ jp nc, _linex_1 \ withix \ add a, h \ add hl, de \
+_linex_1
+		dec b \ ret z \	
+_linex_1a
+		set 1, (hl) \ sub c \ jp nc, _linex_0 \ withix \ add a, h \ add hl, de \
+_linex_0
+		dec b \ ret z \	
+_linex_0a
+		set 0, (hl) \ sub c \ jp nc, _linex_7 \ withix \ add a, h \ add hl, de  \ jp _linex_7 \
+		
+		
 
 _line_vr
 	TODO ;vertical line 

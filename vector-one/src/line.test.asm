@@ -2,45 +2,35 @@
 
 	.MODULE test_line
 
-	xor a
-	ld ($5C78), a
 
 	call vec1_cls	
-
-	ld b, 123
-	ld c, 4
-	ld d, 38
-	ld e, 112
-_loop	
-	push bc
-	push de
-	call vec1_line
-	pop de
-	pop bc
-	ld a, 5
-	add a, d
-	ld d, a
-	jr nc, _loop
-
+	ld hl, 0
 	ld b, 64
-	ld c, 11
-	ld d, 144
-	ld e, 126
-
-_loop2
+_loop
 	push bc
-	push de
-	call vec1_line
-	pop de
-	pop bc
-	ld a, 5
-	add a, b
-	ld b, a
-	jr nc, _loop2
+	
+	ld b, (hl)
+	inc hl
+	ld a, (hl)
+	inc hl
+	and 127
+	ld c, a
 
+	ld d, (hl)
+	inc hl
+	ld a, (hl)
+	inc hl
+	and 127
+	ld e, a
+
+	push hl
+
+	call vec1_line
+	pop hl
+	pop bc
+	djnz _loop
+	
 	call vec1_copy
 
-	ld a, ($5C78)
-	ld b, 0
-	ld c, a
 	ret
+
