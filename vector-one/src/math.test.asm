@@ -60,7 +60,7 @@ _test6
 	ld l, 44
 	ld d, 0
 	ld e, 36
-	call math1_plus
+	call math1_minus
 	ld a, h
 	or a
 	jr nz, _test7
@@ -76,13 +76,13 @@ _test8
 
 	;test minus 2
 	
-	ld h, 0
+	ld h, 1
 	ld l, 44
 	ld d, 0
 	ld e, 36
 	call math1_plus
 	ld a, h
-	or a
+	cp 1
 	jr nz, _test9
 	ld a, l
 	cp 8
