@@ -20,7 +20,7 @@ _loop
 	call d2_rotation
 		
 	ld (_x11), hl
-	ld (_y11), hl
+	ld (_y11), de
 
 	ld hl, (_x11)
 	ld de, 127
