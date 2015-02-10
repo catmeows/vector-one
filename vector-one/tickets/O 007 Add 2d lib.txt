@@ -1,0 +1,2 @@
+setangle
+rotate x,y around 0,0
