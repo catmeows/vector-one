@@ -98,9 +98,10 @@ _sin1
 	and 63
 	add a, a
 	add_hl_a
-	ld l, (hl)
+	ld a, (hl)
 	inc hl
 	ld h, (hl)
+	ld l, a
 	ret
 
 _sintab
